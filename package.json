@@ -1,0 +1,24 @@
+{
+  "name": "ceoflights-deploy",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "PHP EC2 CodeDeploy image for CEO Flights (crm, landing, booking)",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:validation:envVars": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit/validation/envVars.test.js",
+    "docker:build": "bash -c 'docker build --platform=${PLATFORM:-linux/amd64} -t ${FULL_IMAGE_NAME:-ceoflights/deploy}:${VERSION:-latest} .'",
+    "docker:test": "bash -c 'docker run --rm --platform=${PLATFORM:-linux/amd64} ${FULL_IMAGE_NAME:-ceoflights/deploy}:${VERSION:-latest} cat /root/versions.txt'",
+    "docker:push": "bash -c 'docker push ${FULL_IMAGE_NAME:-ceoflights/deploy}:${VERSION:-latest}'",
+    "docker:testBuildPush": "clear && bash scripts/docker-test-build-push.sh",
+    "validate:app": "bash scripts/validate-app.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-cloudfront": "^3.787.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0"
+  }
+}

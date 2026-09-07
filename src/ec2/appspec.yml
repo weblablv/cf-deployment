@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+file_exists_behavior: OVERWRITE
+
+files:
+  - source: /
+    destination: /home/production/prod/app
+
+permissions:
+  - object: /home/production/prod
+    pattern: "**"
+    owner: production
+    group: production
+    mode: 755
+    type:
+      - directory
+
+hooks:
+  AfterInstall:
+    - location: afterinstall.sh
+      timeout: 300
+      runas: production
+    - location: afterinstallRoot.sh
+      timeout: 300
+      runas: root

@@ -1,0 +1,11 @@
+.dockerignore
+tests/
+*.log
+.git/
+.idea/
+.env
+.env.*
+Dockerfile
+README.md
+node_modules
+docs
