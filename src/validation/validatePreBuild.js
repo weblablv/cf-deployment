@@ -23,13 +23,13 @@ export const validatePreBuild = () => {
         `Error: Invalid env file(s) found: ${invalidEnvTemplates.join(', ')}. Only .env.dist is allowed.`
     );
 
-    const stage = process.env.STAGE || process.env.BITBUCKET_DEPLOYMENT_ENVIRONMENT;
+    const stage = process.env.STAGE;
     checkAndExit(
         !stage,
-        'Error: STAGE or BITBUCKET_DEPLOYMENT_ENVIRONMENT is not set. Exiting.'
+        'Error: STAGE is not set. Exiting.'
     );
 
-    const branch = process.env.BRANCH || process.env.BITBUCKET_BRANCH;
+    const branch = process.env.BRANCH;
     checkAndExit(
         branch === 'dev',
         'dev branches are no longer supported!'

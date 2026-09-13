@@ -30,7 +30,7 @@ upload_deployment_log_to_s3() {
 
   if [[ "$LOG_APP" == "unknown-app" || "$LOG_STAGE" == "unknown-stage" || "$LOG_BUILD" == "unknown-build" || "$LOG_COMMIT" == "unknown-commit" ]]; then
     echo "WARN: Missing deploy identity env vars; skipping deployment log upload."
-    echo "WARN: Expected APP_NAME, STAGE, BUILD_ID, COMMIT (or BITBUCKET_REPO_SLUG, BITBUCKET_DEPLOYMENT_ENVIRONMENT, BITBUCKET_BUILD_NUMBER, BITBUCKET_COMMIT)."
+    echo "WARN: Expected APP_NAME, STAGE, BUILD_ID, COMMIT."
     return 0
   fi
 

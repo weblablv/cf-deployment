@@ -34,8 +34,6 @@ const withWorkspace = (setupEnv, run) => {
 
     delete process.env.STAGE;
     delete process.env.BRANCH;
-    delete process.env.BITBUCKET_DEPLOYMENT_ENVIRONMENT;
-    delete process.env.BITBUCKET_BRANCH;
     setupEnv();
 
     try {
@@ -71,16 +69,7 @@ describe('validatePreBuild', () => {
         });
     });
 
-    it('should accept Bitbucket fallbacks when generic vars are unset', () => {
-        withWorkspace(() => {
-            process.env.BITBUCKET_DEPLOYMENT_ENVIRONMENT = 'prod';
-            process.env.BITBUCKET_BRANCH = 'release/prod';
-        }, () => {
-            expect(() => validatePreBuild()).not.toThrow();
-        });
-    });
-
-    it('should fail when neither STAGE nor BITBUCKET_DEPLOYMENT_ENVIRONMENT is set', () => {
+    it('should fail when STAGE is not set', () => {
         withWorkspace(() => {
             process.env.BRANCH = 'release/prod';
         }, () => {

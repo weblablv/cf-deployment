@@ -12,7 +12,7 @@ source /opt/weblablv/src/resolve-env.sh
 
 export APPLICATION_NAME="${APP_NAME:-}"
 if [[ -z "${APPLICATION_NAME}" ]]; then
-  echo "Error: APP_NAME or BITBUCKET_REPO_SLUG is not set"
+  echo "Error: APP_NAME is not set"
   exit 1
 fi
 
