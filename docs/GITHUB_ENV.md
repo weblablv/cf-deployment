@@ -43,4 +43,4 @@ Prod Environment **variables** are set on each GitHub repo (`APP_NAME`, `STAGE`,
 
 AWS CI uses GitHub OIDC and role `github-actions-cf-deploy`. App `.env.dist` keys stay as Environment `prod` secrets. Do not put IAM user access keys in GitHub.
 
-App workflows build the image from a pinned `weblablv/cf-deployment` git SHA (`DEPLOY_REF`) because GHCR pulls from other private repos were denied. `cf-deployment` is public so those checkouts work. After you grant the three app repos access to the GHCR package, you can switch back to `ghcr.io/weblablv/cf-deployment:<sha>`.
+App workflows pull the public image `ghcr.io/weblablv/cf-deployment:<DEPLOY_REF>` (full git SHA). The image job on `cf-deployment` `main` publishes that tag and sets the package visibility to public.
