@@ -19,8 +19,7 @@ Workflows must set `APP_NAME` to the CodeDeploy slug above, not the GitHub repo 
 | `STAGE` | variable | `prod` |
 | `S3_BUCKET` | variable | `630969833829-ci` (from landing Bitbucket YAML) |
 | `APP_AWS_REGION` | variable | `eu-central-1` |
-| `AWS_ACCESS_KEY_ID` | secret | CI user (S3 + CodeDeploy). Copy from Bitbucket prod. |
-| `AWS_SECRET_ACCESS_KEY` | secret | CI user. Copy from Bitbucket prod. |
+| AWS auth | OIDC | Role `github-actions-cf-deploy`. No static AWS keys in GitHub. |
 | `S3_LOG_BUCKET` | variable | optional; copy from Bitbucket if set |
 | `CLOUDFRONT_DISTRIBUTION_ID` | variable | landing: `EJ7BR3IMLAUCD`. Confirm booking/crm in Bitbucket. |
 
@@ -42,6 +41,6 @@ Treat empty-in-dist keys as secrets unless they are public URLs.
 
 Prod Environment **variables** are set on each GitHub repo (`APP_NAME`, `STAGE`, `S3_BUCKET`, `APP_AWS_REGION`, landing `CLOUDFRONT_DISTRIBUTION_ID`).
 
-**Secrets were not uploaded** from local `.env` files. Before the first real GitHub deploy, copy Bitbucket prod deployment secrets into each repo’s Environment `prod` with `gh secret set --env prod`. Required names match `.env.dist` plus `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`.
+AWS CI uses GitHub OIDC and role `github-actions-cf-deploy`. App `.env.dist` keys stay as Environment `prod` secrets. Do not put IAM user access keys in GitHub.
 
 App workflows build the image from a pinned `weblablv/cf-deployment` git SHA (`DEPLOY_REF`) because GHCR pulls from other private repos were denied. `cf-deployment` is public so those checkouts work. After you grant the three app repos access to the GHCR package, you can switch back to `ghcr.io/weblablv/cf-deployment:<sha>`.

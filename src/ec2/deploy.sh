@@ -46,6 +46,9 @@ if [[ -z ${AWS_SECRET_ACCESS_KEY} ]]; then
   exit 1
 fi
 
+# Present for OIDC assumed roles; unused for long-lived IAM user keys.
+export AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN:-}"
+
 export ARTIFACT_S3_KEY="${APPLICATION_NAME}/latest.tar.gz"
 S3BuildPath="s3://$S3_BUCKET/$ARTIFACT_S3_KEY"
 # Check if bucket exists
