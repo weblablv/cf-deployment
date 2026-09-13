@@ -8,7 +8,9 @@ AWS_DEFAULT_REGION = 'eu-central-1'
 DEPLOYMENT_GROUP_NAME = 'DG1'
 DEPLOYMENT_CONFIG = 'CodeDeployDefault.OneAtATime'
 
-BUCKET_KEY = os.getenv('APPLICATION_NAME') + '/latest_bitbucket_builds.tar.gz'
+BUCKET_KEY = os.getenv('ARTIFACT_S3_KEY') or (
+    os.getenv('APPLICATION_NAME') + '/latest.tar.gz'
+)
 
 def deploy_new_revision():
     """

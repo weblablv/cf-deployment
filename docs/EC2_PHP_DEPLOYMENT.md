@@ -39,7 +39,7 @@ Then `.git`, `.gitignore`, and `bitbucket-pipelines.yml` are removed.
 Artifact upload:
 
 ```text
-s3://{S3_BUCKET}/{APP_NAME}/latest_bitbucket_builds.tar.gz
+s3://{S3_BUCKET}/{APP_NAME}/latest.tar.gz
 ```
 
 `APP_NAME` must match the existing CodeDeploy application name (`landing-app` / `booking-app` / `crm-app`). Group `DG1`, region `eu-central-1`. On success the tarball is deleted.

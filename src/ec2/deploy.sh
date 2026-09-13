@@ -46,7 +46,8 @@ if [[ -z ${AWS_SECRET_ACCESS_KEY} ]]; then
   exit 1
 fi
 
-S3BuildPath="s3://$S3_BUCKET/$APPLICATION_NAME/latest_bitbucket_builds.tar.gz"
+export ARTIFACT_S3_KEY="${APPLICATION_NAME}/latest.tar.gz"
+S3BuildPath="s3://$S3_BUCKET/$ARTIFACT_S3_KEY"
 # Check if bucket exists
 if ! aws s3 ls "s3://$S3_BUCKET" 2>/dev/null; then
   echo "Error: S3 bucket $S3_BUCKET does not exist or you don't have permissions to access it"
