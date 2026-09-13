@@ -43,4 +43,4 @@ Prod Environment **variables** are set on each GitHub repo (`APP_NAME`, `STAGE`,
 
 AWS CI uses GitHub OIDC and role `github-actions-cf-deploy`. App `.env.dist` keys stay as Environment `prod` secrets. Do not put IAM user access keys in GitHub.
 
-App workflows pull the public image `ghcr.io/weblablv/cf-deployment:<DEPLOY_REF>` (full git SHA). The image job on `cf-deployment` `main` publishes that tag and sets the package visibility to public.
+App workflows pull `ghcr.io/weblablv/cf-deployment:<DEPLOY_REF>` (full git SHA). The image job on `cf-deployment` `main` publishes that tag. The first public publish must be set once in the GitHub package UI (`weblablv/cf-deployment` → Packages → `cf-deployment` → Change visibility → Public). `GITHUB_TOKEN` cannot do that (API 404).
