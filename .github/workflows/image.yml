@@ -45,5 +45,5 @@ jobs:
             -f visibility=internal || true
           for r in cf-landing cf-booking cf-crm; do
             gh api --method PUT \
-              "orgs/weblablv/packages/container/cf-deployment/repositories/${r}"
+              "orgs/weblablv/packages/container/cf-deployment/repositories/${r}" || true
           done

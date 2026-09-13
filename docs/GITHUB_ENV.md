@@ -44,4 +44,4 @@ Prod Environment **variables** are set on each GitHub repo (`APP_NAME`, `STAGE`,
 
 **Secrets were not uploaded** from local `.env` files. Before the first real GitHub deploy, copy Bitbucket prod deployment secrets into each repo’s Environment `prod` with `gh secret set --env prod`. Required names match `.env.dist` plus `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`.
 
-Also grant `cf-landing`, `cf-booking`, and `cf-crm` Actions access to the `ghcr.io/weblablv/cf-deployment` package (GitHub → package → Manage Actions access). The local `gh` token lacks `read:packages` / `write:packages`.
+App workflows build the image from a pinned `weblablv/cf-deployment` git SHA (`DEPLOY_REF`) because GHCR pulls from other private repos were denied. `cf-deployment` is public so those checkouts work. After you grant the three app repos access to the GHCR package, you can switch back to `ghcr.io/weblablv/cf-deployment:<sha>`.
