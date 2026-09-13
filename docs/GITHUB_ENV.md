@@ -40,4 +40,8 @@ Treat empty-in-dist keys as secrets unless they are public URLs.
 
 `DB_NAME`, `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_PORT`, `MAILER_SMTP_USER`, `MAILER_SMTP_PASSWORD`, `APP_AWS_S3_BUCKET`, `APP_AWS_S3_BUCKET_MAILER`, `APP_AWS_S3_MIRROR`, `GEO_IP_ON`, `SECURE_STORAGE_AUTH`, `LANDING_URL`, `MAILER_LITE_API_KEY`, `WITHPERSONA_API_KEY`, `AUTHORIZE_NET_MERCHANT_LOGIN_ID`, `AUTHORIZE_NET_MERCHANT_TRANSACTION_KEY`, `CRM_CHAT_ENCRYPT_KEYS`, `API_FLIGHT_AWARE`, `API_CHAT_GPT`, `DIAL_PAD_KEY`, `DIALPAD_SMS_KEY`, `DIALPAD_SMS_WEBHOOK_SECRET`
 
-Bitbucket UI values were not readable from this machine. Upload remaining secrets with `gh secret set --env prod` before the first real GitHub deploy.
+Prod Environment **variables** are set on each GitHub repo (`APP_NAME`, `STAGE`, `S3_BUCKET`, `APP_AWS_REGION`, landing `CLOUDFRONT_DISTRIBUTION_ID`).
+
+**Secrets were not uploaded** from local `.env` files. Before the first real GitHub deploy, copy Bitbucket prod deployment secrets into each repo’s Environment `prod` with `gh secret set --env prod`. Required names match `.env.dist` plus `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`.
+
+Also grant `cf-landing`, `cf-booking`, and `cf-crm` Actions access to the `ghcr.io/weblablv/cf-deployment` package (GitHub → package → Manage Actions access). The local `gh` token lacks `read:packages` / `write:packages`.
