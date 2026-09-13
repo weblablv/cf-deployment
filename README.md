@@ -2,6 +2,8 @@
 
 CI image that packages crm, landing, and booking and deploys them to EC2 via AWS CodeDeploy.
 
+Published image: `ghcr.io/weblablv/cf-deployment` (tag with the git SHA, or `latest` from `main`).
+
 Runtime config comes from `.env` generated from `.env.dist` + CI env vars. TLS is terminated at CloudFront; this image does not copy SSL certs or `local.config.php` from S3.
 
 Validate an app without deploying (uses `git archive` + dummy env keys):
